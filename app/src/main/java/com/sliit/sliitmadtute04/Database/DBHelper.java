@@ -2,10 +2,15 @@ package com.sliit.sliitmadtute04.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.Selection;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper
 {
@@ -30,6 +35,7 @@ public class DBHelper extends SQLiteOpenHelper
 
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -44,6 +50,50 @@ public class DBHelper extends SQLiteOpenHelper
         values.put(UsersMaster.Users.COLUMN_NAME_PASSWORD , password);
 
         long newRowId = db.insert(UsersMaster.Users.TABLE_NAME, null, values);
+    }
 
+    public List readAllInfo(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        String[] projection = {
+                UsersMaster.Users._ID,
+                UsersMaster.Users.COLUMN_NAME_USERNAME,
+                UsersMaster.Users.COLUMN_NAME_PASSWORD
+        };
+
+
+        String sortOrder = UsersMaster.Users.COLUMN_NAME_USERNAME + " DESC";
+        Cursor cursor = db.query(
+                UsersMaster.Users.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
+        );
+
+        List userNames = new ArrayList<>();
+        List passwords = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+            String username = cursor.getString( cursor.getColumnIndexOrThrow(UsersMaster.Users.COLUMN_NAME_USERNAME));
+            String password = cursor.getString( cursor.getColumnIndexOrThrow(UsersMaster.Users.COLUMN_NAME_PASSWORD));
+
+            userNames.add(username);
+            passwords.add(password);
+        }
+
+        cursor.close();
+        return userNames;
+    }
+
+
+    public void deleteInfo(String userName)
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = UsersMaster.Users.COLUMN_NAME_USERNAME + " LIKE? ";
+        String[] selectionAgrs = { userName };
+        db.delete(UsersMaster.Users.TABLE_NAME, selection, selectionAgrs);
     }
 }
