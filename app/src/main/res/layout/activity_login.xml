@@ -16,7 +16,7 @@
         android:layout_marginLeft="20dp"/>
 
     <EditText
-        android:id="@+id/user_name"
+        android:id="@+id/username"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -33,13 +33,13 @@
         android:layout_below="@+id/text01"/>
 
     <EditText
-        android:id="@+id/user_password"
+        android:id="@+id/password"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/user_name"/>
+        android:layout_below="@+id/username"/>
 
 
     <Button
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="Select All"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/user_password"
+        android:layout_below="@+id/password"
         android:layout_marginTop="20dp"
         />
 

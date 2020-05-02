@@ -1,5 +1,6 @@
 package com.sliit.sliitmadtute04.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -31,6 +32,18 @@ public class DBHelper extends SQLiteOpenHelper
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public void addInfo(String userName , String password)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(UsersMaster.Users.COLUMN_NAME_USERNAME , userName);
+        values.put(UsersMaster.Users.COLUMN_NAME_PASSWORD , password);
+
+        long newRowId = db.insert(UsersMaster.Users.TABLE_NAME, null, values);
 
     }
 }
