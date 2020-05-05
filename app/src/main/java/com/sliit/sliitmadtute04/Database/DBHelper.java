@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.Selection;
+//import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
@@ -17,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper
 
     public static final String DATABASE_NAME = "UserInfo.db";
 
-    public DBHelper(@Nullable Context context , @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -96,4 +97,6 @@ public class DBHelper extends SQLiteOpenHelper
         String[] selectionAgrs = { userName };
         db.delete(UsersMaster.Users.TABLE_NAME, selection, selectionAgrs);
     }
+
+
 }

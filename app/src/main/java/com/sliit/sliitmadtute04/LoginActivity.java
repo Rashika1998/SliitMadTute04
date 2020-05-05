@@ -2,6 +2,7 @@ package com.sliit.sliitmadtute04;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import com.sliit.sliitmadtute04.Database.DBHelper;
 public class LoginActivity extends AppCompatActivity
 {
 
+    DBHelper mDatabaseHelper;
     private EditText username;
     private EditText password;
     private Button SelectAll , Add , Delete , SignIn , Update;
@@ -33,11 +35,34 @@ public class LoginActivity extends AppCompatActivity
         Update = (Button) findViewById(R.id.update);
 
 
+
+
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
+                String userName = username.getText().toString();
+                String passWord = username.getText().toString();
 
+                mDatabaseHelper.addInfo(userName , passWord);
+            }
+        });
+
+        Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                String userName = username.getText().toString();
+                mDatabaseHelper.deleteInfo(userName);
+            }
+        });
+
+        SelectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                startActivity(intent);
             }
         });
     }
